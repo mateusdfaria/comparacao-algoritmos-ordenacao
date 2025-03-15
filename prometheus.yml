@@ -1,0 +1,10 @@
+global:
+  scrape_interval: 5s
+ 
+scrape_configs:
+  - job_name: "grafana"
+    static_configs:
+      - targets: ["localhost:9090"]
+  - job_name: "app"
+    static_configs:
+      - targets: ["host.docker.internal:8000"]  # Ou porta onde sua aplicação está rodando
