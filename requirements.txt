@@ -1,0 +1,5 @@
+werkzeug
+flask
+opentelemetry-sdk
+opentelemetry-exporter-prometheus-wsgi
+prometheus_client
