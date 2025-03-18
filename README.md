@@ -1,3 +1,4 @@
+
 # 📊 Comparação de Algoritmos de Ordenação
 
 Este repositório contém a implementação e análise de desempenho de diversos algoritmos de ordenação em Python. Utilizamos o padrão **Strategy** para modularidade e o **Prometheus** para coleta de métricas.
@@ -19,21 +20,15 @@ Este repositório contém a implementação e análise de desempenho de diversos
 
 ---
 
-## 📂 Estrutura do Projeto
-📦 sorting-algorithms ┣ 📜 sorting.py # Implementação dos algoritmos ┣ 📜 main.py # Execução e coleta de métricas ┣ 📜 README.md # Documentação do projeto ┗ 📜 requirements.txt # Dependências
-
-
----
-
 ## 🔧 Como Executar o Projeto
 
 1. **Clone o repositório**:
    ```bash
-        git clone https://github.com/seu-usuario/sorting-algorithms.git
-        cd sorting-algorithms
-        pip install -r requirements.txt
-        python main.py
-        http://localhost:8000
+     git clone https://github.com/seu-usuario/sorting-algorithms.git
+     cd sorting-algorithms
+     pip install -r requirements.txt
+     python main.py
+     http://localhost:8000
 
 🏗️ Implementação do Padrão Strategy
 O padrão Strategy permite encapsular diferentes algoritmos de ordenação e torná-los intercambiáveis.
