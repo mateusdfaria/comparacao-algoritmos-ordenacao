@@ -31,7 +31,7 @@ def measure_sorting_time(sorting_strategy, data):
 
 def main():
     start_http_server(8000)
-    sizes = [1000, 10000]
+    sizes = [1000, 10000, 100000]
     algorithms = [
         ("Bubble Sort", BubbleSort()),
         ("Bubble Sort Optimized", BubbleSortOptimized()),
