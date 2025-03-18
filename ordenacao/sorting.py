@@ -184,4 +184,66 @@ class SortingContext:
         """Executa a ordenação e retorna os dados ordenados junto com as métricas."""
         sorted_data = self.strategy.sort(data)
         metrics = self.strategy.get_metrics()
-        return sorted_data, metrics
+        return sorted_data, metrics["comparisons"], metrics["swaps"]
+
+class TimSort(SortingStrategy):
+    def sort(self, data):
+        def insertion_sort(arr, left, right):
+            for i in range(left + 1, right + 1):
+                key = arr[i]
+                j = i - 1
+                while j >= left and arr[j] > key:
+                    self.comparisons += 1
+                    arr[j + 1] = arr[j]
+                    j -= 1
+                    self.swaps += 1
+                arr[j + 1] = key
+                if j != i - 1:
+                    self.swaps += 1
+
+        def merge(arr, left, mid, right):
+            left_arr = arr[left:mid + 1]
+            right_arr = arr[mid + 1:right + 1]
+            i = j = 0
+            k = left
+            while i < len(left_arr) and j < len(right_arr):
+                self.comparisons += 1
+                if left_arr[i] <= right_arr[j]:
+                    arr[k] = left_arr[i]
+                    i += 1
+                else:
+                    arr[k] = right_arr[j]
+                    j += 1
+                k += 1
+                self.swaps += 1
+            while i < len(left_arr):
+                arr[k] = left_arr[i]
+                i += 1
+                k += 1
+                self.swaps += 1
+            while j < len(right_arr):
+                arr[k] = right_arr[j]
+                j += 1
+                k += 1
+                self.swaps += 1
+
+        def tim_sort(arr):
+            n = len(arr)
+            RUN = 32  # Tamanho mínimo de um run, típico do Tim Sort
+
+            # Ordenar blocos pequenos com Insertion Sort
+            for i in range(0, n, RUN):
+                insertion_sort(arr, i, min((i + RUN - 1), (n - 1)))
+
+            # Combinar os blocos usando Merge Sort
+            size = RUN
+            while size < n:
+                for left in range(0, n, size * 2):
+                    mid = left + size - 1
+                    right = min((left + size * 2 - 1), (n - 1))
+                    if mid < right:
+                        merge(arr, left, mid, right)
+                size *= 2
+
+        tim_sort(data)
+        return data
